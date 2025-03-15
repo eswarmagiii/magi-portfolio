@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salesforce Developer Portfolio</title>
+    <title>EmPortfolio</title>
+    <link rel="website icon" type="png" href="10438243.png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -17,23 +18,28 @@
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             background-color: #f4f4f4;
             color: #333;
             overflow-x: hidden;
         }
-        header {
-            background: transparent;
-            padding: 20px;
+        .section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            position: absolute;
-            width: 100%;
-            z-index: 1000;
+            background-size: cover;
+            background-position: center;
         }
         .glossy-text {
             font-size: 50px;
             font-weight: bold;
-            background: linear-gradient(45deg, #f5f7f8, #f5f6f6);
+            background: linear-gradient(45deg, #030303, #108e8e);
             -webkit-background-clip: text;
             background-clip: text;  /* Standard property */
             -webkit-text-fill-color: transparent;
@@ -43,8 +49,8 @@
             font-size: 30px;
             font-weight: 400;
             opacity: 0.7;
+            color: #f4f4f4;
         }
-        
         .salesforce-logo {
             
             mix-blend-mode: multiply; /* Tries to remove white */
@@ -97,35 +103,11 @@
         .logos img:hover {
             opacity: 1;
         }
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-size: 18px;
-            cursor: pointer;
-        }
-        .section {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            position: absolute;
-            width: 100%;
-            opacity: 0;
-            transform: scale(0.9);
-        }
-        .hero { background: url('photo_2025-03-12_01-06-34.jpg') no-repeat center center/cover; }
-        .about { background: url('photo_2025-03-12_01-26-57.jpg') no-repeat center center/cover; }
-        .projects { background: url('photo_2025-03-12_04-03-12.jpg') no-repeat center center/cover; }
-        .contact { background: url('photo_2025-03-12_04-35-16.jpg') no-repeat center center/cover; }
+        .hero { background-image: url('photo_2025-03-12_01-06-34.jpg'); }
+        .about { background-image: url('photo_2025-03-12_01-26-57.jpg'); }
+        .projects { background-image: url('photo_2025-03-12_04-03-12.jpg'); color:rgb(3, 3, 3);}
+        .contact { background-image: url('photo_2025-03-12_04-35-16.jpg'); }
+        
         .active {
             opacity: 1 !important;
             transform: scale(1) !important;
@@ -136,30 +118,184 @@
             height: 150px;
             border-radius: 50%;
             margin-top: 10px;
+            overflow:hidden;
+            box-shadow:0 0 20px #fbfaf9, 0 0 40px #ea9d03;
+            animation: glow-border 1.5s infinite alternate;
         }
         footer {
-            background:transparent; 
+            background: transparent; /* Fully transparent footer */
             color: rgb(255, 255, 255, 0.6);
             text-align: center;
             padding: 5px 0;
             position: absolute;
             bottom: 0;
-            width: 80%;
+            width: 100%;
+        }
+        
+        .project-list {
+            display: flex;
+            z-index: 20; /* Higher than the image */
+            flex-direction: column;
+            gap: 10px;
+        }
+        .project-item {
+            background: transparent;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .project-item:hover {
+            position: relative;
+            width: 450px;
+            height: auto;
+            border: 5px solid var(--primary-color);
+            border-radius: 30px;
+            padding: 7.5em 2.5em 4em 2.5em;
+            color: var(--second-color);
+            box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(25px);
+            background-image: url("iso-republic-bird-flying-moody-clouds.jpg");
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .project-details {
+            margin-top: 20px;
+            padding: 15px;
+            background: transparent;
+            color: rgb(246, 242, 242);
+            border-radius: 8px;
+            display: none;
+        }
+        .project-link {
+            display: block;
+            margin-top: 10px;
+            color: blue;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .project-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .glossy-text {
+                font-size: 30px;
+            }
+            .dim-text {
+                font-size: 20px;
+            }
+            .profile-img {
+                width: 100px;
+                height: 100px;
+            }
+            .logos {
+                flex-direction: column;
+                align-items: center;
+            }
+            .logos img {
+                width: 40px;
+                margin: 5px 0;
+            }
+            .navbar {
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-link {
+                padding: 5px 10px;
+                font-size: 14px;
+            }
+            .section {
+                padding: 20px;
+            }
+            .project-item {
+                width: 100%;
+            }
+            .project-item:hover {
+                width: 100%;
+                padding: 10px;
+            }
+        }
+        @keyframes slideDown {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .navbar {
+            transform: translateY(-100px);
+            opacity: 0;
+            animation: slideDown 0.5s ease-in-out forwards;
+            background: transparent; /* Removed glass effect */
+            padding: 10px 20px;
+            border-radius: 25px;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .nav-link {
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 15px;
+            transition: background 0.3s, color 0.3s;
+            text-decoration: none;
+            color: black;
+        }
+        .nav-link:hover, .nav-link.active {
+            background: linear-gradient(45deg, #194b4f, #33fffc);
+            color: white;
+        }
+        .nav-item {
+            position: relative;
+        }
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            width: 0;
+            height: 3px;
+            background: #FFD700;
+            transition: all 0.3s;
+        }
+        .nav-item:hover::after {
+            width: 100%;
+            left: 0;
         }
     </style>
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a onclick="showSection('hero')">Home</a></li>
-                <li><a onclick="showSection('about')">About</a></li>
-                <li><a onclick="showSection('projects')">Projects</a></li>
-                <li><a onclick="showSection('contact')">Contact</a></li>
-            </ul>
+        <nav class="navbar navbar-dark fixed-top">
+            <div class="container d-flex justify-content-center">
+                <ul class="navbar-nav d-flex flex-row text-center">
+                    <li class="nav-item"><a onclick="section('hero')" class="nav-link" href="#hero">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                    <li class="nav-item"><a onclick="section('about')" class="nav-link" href="#about">
+                        <i class="fas fa-user"></i> About
+                    </a>
+                </li>
+                    <li class="nav-item"><a onclick="section('projects')" class="nav-link" href="#projects">
+                        <i class="fas fa-briefcase"></i> Projects
+                    </a>
+                </li>
+                    <li class="nav-item"><a onclick="section('contact')" class="nav-link" href="#contact">
+                        <i class="fas fa-envelope"></i> Contact
+                    </a>
+                </li>
+                </ul>
+            </div>
         </nav>
     </header>
-    
     <section id="hero" class="section hero active">
         <div>
             <h1 class="glossy-text">Hi, I'm Eswar</h1>
@@ -172,82 +308,119 @@
             </div>
         </div>
         <img src="Salesforce Logo.jpeg" alt="Salesforce Logo" width="100" class="salesforce-logo">
-        <footer>
-            <p>&copy; 2025 Eswar. All Rights Reserved.</p>
-
-        </footer>
+        
     </section>
-    
     <section id="about" class="section about">
         <h2>About Me</h2>
         <p>"I'm an aspiring Salesforce Developer with a strong passion for technology and problem-solving".</p>
         <p>I am looking forward to the opportunity to apply what I’ve learned in real-world projects. 
             I am committed to continuous learning and growth, with the ultimate aim of advancing my career in Salesforce development</p>
         <p>20X Superbadge | AI Associate Certified | Ranger Salesforce Developer & Administrator | LWC | Apex | Flows | Triggers Expert in Sales & Service Cloud | Integration | Asynchronous Apex salesforce.com☁</p>
-        <img src="Salesforce Logo.jpeg" alt="Salesforce Logo" width="100" class="salesforce-logo">
-        <footer>
-            <p>&copy; 2025 Eswar. All Rights Reserved.</p>
-        </footer>
-    </section>
-    
+       
+        
+       
+</section>
+
     <section id="projects" class="section projects">
-        <h2>Projects:Salesforce Lead Management System</h2>
-        <ul>
-            <li>
-                📌 Overview
-                This project is a Salesforce-based Lead Management System designed to automate lead tracking, enhance sales pipeline efficiency, and improve data-driven decision-making. The system leverages Apex, Lightning Web Components (LWC), SOQL, and Flows to streamline the lead qualification and conversion process.
-                
-                🛠️ Features & Implementations
-                🔹 Web-to-Lead Integration – Captures leads from an online form and stores them in Salesforce.
-                🔹 Apex Trigger: Auto-Create Opportunity on Lead Conversion – Ensures every converted Lead generates an Opportunity, reducing manual work.
-                🔹 Custom Lightning Web Component (LWC) Dashboard – Displays leads with filtering and real-time updates.
-                🔹 SOQL-Based Data Analysis – Fetches and analyzes high-priority leads and conversion rates.
-                🔹 Flow-Based Automation – Sends email notifications when a Lead is marked as "Qualified."
-                🔹 Reports & Dashboards – Provides visual insights into lead performance and sales trends.
-                
-                 Technologies Used
-                Salesforce Apex – Triggers & Classes for automation
-                Lightning Web Components (LWC) – Custom UI for lead insights
-                SOQL & DML Operations – For efficient data retrieval
-                Salesforce Flows – Automating email notifications
-                Reports & Dashboards – Visualizing lead data
-                Web-to-Lead – Lead capture automation
-                 Project Impact
-                Automated lead qualification and Opportunity creation, reducing manual data entry.
-                Improved sales tracking by ensuring all converted Leads have associated Opportunities.
-                Enhanced decision-making with SOQL-based reports and real-time insights via LWC.
-                🔜 Next Steps
-                Implement REST API Integration to sync leads with an external system.
-                Optimize LWC with advanced filtering and sorting options.
-                Develop batch processes for handling large datasets efficiently.</li>
-                
-        </ul>
-        <img src="Salesforce Logo.jpeg" alt="Salesforce Logo" width="100" class="salesforce-logo">
-        <footer>
-            <p>&copy; 2025 Eswar. All Rights Reserved.</p>
-        </footer>
+        <h2>My Projects</h2>
+        
+        <!-- Project List -->
+        <div class="project-list">
+            <div class="project-item" onclick="showProject('leadManagement')">Salesforce Lead Management</div>
+        </div>
+    
+        <!-- Project Details Section -->
+        <div id="project-details" class="project-details">
+            <h3 id="project-title">Click on a project to view details</h3>
+            <p id="project-description"></p>
+            <a id="project-link" href="#" target="_blank" class="project-link" style="display:none;">View Project</a>
+        </div>
+    
     </section>
     
-    <section id="contact" class="section contact">
-        <h2>Contact Me</h2>
-        <p>Email: <a href="mailto:eswarmagi123456@gmail.com">eswarmagi123456@gmail.com</a></p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/eswar-magi-87b493278" target="_blank">Visit My LinkedIn</a></p>
-        <p>GitHub: <a href="https://github.com/eswarmagiii" target="_blank">View My GitHub</a></p>
-        <p>Trailhead: <a href="https://www.salesforce.com/trailblazer/eswarmagi" target="_blank">My Salesforce Trailhead</a></p>
-        <img src="Salesforce Logo.jpeg" alt="Salesforce Logo" width="100" class="salesforce-logo">
-        <footer>
-            <p>&copy; 2025 Eswar. All Rights Reserved.</p>
-        </footer>
-    </section>
-    
+
     <script>
-        function showSection(sectionId) {
-            gsap.to('.section', { opacity: 0, scale: 0.9, duration: 0.6, onComplete: function() {
-                document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
-                document.getElementById(sectionId).classList.add('active');
-                gsap.to('#' + sectionId, { opacity: 1, scale: 1, duration: 0.6});
-            }});
+        function showProject(projectId) {
+            let projects = {
+                leadManagement: {
+                    title: "Salesforce Lead Management",
+                    description: "A Lead Management System built using Apextrigger, LWC, SOQL, and Flows.",
+                    link: "https://www.linkedin.com/posts/eswar-magi-87b493278_salesforce-leadmanagement-apextriggers-activity-7304632296630849536-ibxT"
+                },
+            };
+    
+            let project = projects[projectId];
+    
+            if (project) {
+                document.getElementById("project-title").innerText = project.title;
+                document.getElementById("project-description").innerText = project.description;
+                
+                let projectLink = document.getElementById("project-link");
+
+                // Ensure the link is updated first before making it visible
+                projectLink.style.display = "none"; // Temporarily hide
+                projectLink.href = project.link; // Update link
+                projectLink.style.display = "inline-block"; // Show again
+                
+                document.getElementById("project-details").style.display = "block";
+            }
         }
+
+        function showSection(sectionId) {
+            const activeSection = document.querySelector('.section.active');
+            const targetSection = document.getElementById(sectionId);
+
+            if (activeSection !== targetSection) {
+                gsap.timeline()
+                    .to(activeSection, { opacity: 0, scale: 0.9, duration: 0.6, ease: "power1.inOut" })
+                    .set(activeSection, { className: "-=active" })
+                    .set(targetSection, { className: "+=active" })
+                    .fromTo(targetSection, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.6, ease: "power1.inOut" });
+            }
+        }
+    </script>   
+
+      <!-- COntact link Section -->
+   <section id="contact" class="section contact">
+    <h2>Contact Me</h2>
+    <p><a href="mailto:eswarmagi123456@gmail.com" id="emailLink"><i class="fas fa-envelope"></i> Email Me</a></p>
+    <p><a href="https://www.linkedin.com/in/eswar-magi-87b493278" target="_blank" id="linkedinLink"><i class="fab fa-linkedin"></i> LinkedIn</a></p>
+    <p><a href="https://github.com/eswarmagiii" target="_blank" id="githubLink"><i class="fab fa-github"></i> GitHub</a></p>
+    <p><a href="https://www.salesforce.com/trailblazer/eswarmagi" target="_blank" id="trailheadLink"><i class="fas fa-mountain"></i> Trailhead</a></p>
+
+</section>
+
+<script>document.getElementById("emailLink").addEventListener("click", function() {
+    window.location.href = "mailto:eswarmagi123456@gmail.com";
+});
+
+document.getElementById("linkedinLink").addEventListener("click", function() {
+    window.open("https://www.linkedin.com/in/eswar-magi-87b493278", "_blank");
+});
+
+document.getElementById("githubLink").addEventListener("click", function() {
+    window.open("https://github.com/eswarmagiii", "_blank");
+});
+
+document.getElementById("trailheadLink").addEventListener("click", function() {
+    window.open("https://www.salesforce.com/trailblazer/eswarmagi", "_blank");
+});
+</script>
+
+    <script>
+        $(document).ready(function() {
+            $(window).on('scroll', function() {
+                let scrollPos = $(document).scrollTop();
+                $('section').each(function() {
+                    let sectionTop = $(this).offset().top - 100;
+                    let sectionId = $(this).attr('id');
+                    if (scrollPos >= sectionTop) {
+                        $('.nav-link').removeClass('active');
+                        $(`.nav-link[href='#${sectionId}']`).addClass('active');
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
